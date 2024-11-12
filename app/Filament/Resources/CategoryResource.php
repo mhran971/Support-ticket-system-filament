@@ -53,6 +53,7 @@ class CategoryResource extends Resource
                 TextColumn::make('slug'),
                 ToggleColumn::make('is_active')
                     ->label('Status')
+                    ->disabled(!auth()->user()->hasPermission('category_edit')),
             ])
             ->filters([
                 //
