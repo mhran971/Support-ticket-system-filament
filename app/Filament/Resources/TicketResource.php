@@ -71,7 +71,7 @@ class TicketResource extends Resource
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
-                Tables\Actions\DeleteAction::make(),
+                Tables\Actions\DeleteAction::make()->hidden(auth()->user()->hasPermission('ticket_delete')),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
