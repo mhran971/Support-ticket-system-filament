@@ -17,12 +17,12 @@ class RolesTableSeeder extends Seeder
             $roles = [
                 [
                     'id' => 1,
-                    'name'=> 'Admin',
+                    'name'=> Role::ROLES['admin'],
 
                 ],
                 [
                     'id' => 2,
-                    'name'=> 'Agent',
+                    'name'=> Role::ROLES['Agent'],
 
                 ]
             ];

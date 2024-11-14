@@ -10,6 +10,11 @@ class Role extends Model
       'name'
     ];
 
+    const ROLES = [
+        'Admin' => 'Admin',
+        'Agent' => 'Agent'
+    ];
+
     public function permissions(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
     {
         return $this->belongsToMany(Permission::class);
