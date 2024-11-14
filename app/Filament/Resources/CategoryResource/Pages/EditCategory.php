@@ -13,7 +13,12 @@ class EditCategory extends EditRecord
     protected function getHeaderActions(): array
     {
         return [
-            Actions\DeleteAction::make(),
+            //
         ];
+    }
+
+    protected function getCreatedNotificationTitle(): ?string
+    {
+        return  "Category updated successfully";
     }
 }
