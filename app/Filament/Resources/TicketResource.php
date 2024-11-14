@@ -4,7 +4,9 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\TicketResource\Pages;
 use App\Filament\Resources\TicketResource\RelationManagers;
+use App\Models\Role;
 use App\Models\Ticket;
+use App\Models\User;
 use Filament\Forms;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
@@ -14,8 +16,9 @@ use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Columns\TextInputColumn;
+use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
-
+use Illuminate\Database\Eloquent\Builder;
 
 
 class TicketResource extends Resource
@@ -42,7 +45,9 @@ class TicketResource extends Resource
                         ->options(self::$model::PRIORITY)
                         ->required(),
                     Select::make('assigned_to')
-                    ->relationship('assignedTo','name')
+                        ->options(User::Wherehas('roles',function (Builder $query){
+                        $query->where('name', Role::ROLES['Agent']);
+                    })->pluck('name','id')->toArray())
                     ->required(),
 //                    Select::make('assigned_by')
 //                        ->relationship('assignedBy','name'),
@@ -52,6 +57,7 @@ class TicketResource extends Resource
     public static function table(Table $table): Table
     {
         return $table
+            ->defaultSort('created_at', 'desc')
             ->columns([
                 TextColumn::make('title')
                     ->description(fn(Ticket $ticket): string =>$ticket->description)
@@ -65,9 +71,18 @@ class TicketResource extends Resource
                 TextColumn::make('assignedBy.name'),
                 TextColumn::make('assignedTo.name'),
                 TextInputColumn::make('comment'),
+                TextColumn::make('created_at')
+                ->dateTime  ()
+                ->sortable(),
+
             ])
             ->filters([
-                //
+                    SelectFilter::make('status')
+                    ->options(self::$model::STATUS)
+                    ->placeholder('Filter by status'),
+                    SelectFilter::make('priority')
+                    ->options(self::$model::PRIORITY)
+                    ->placeholder('Filter by priority'),
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
