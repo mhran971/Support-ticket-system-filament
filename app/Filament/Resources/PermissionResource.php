@@ -5,6 +5,7 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\PermissionResource\Pages;
 use App\Filament\Resources\PermissionResource\RelationManagers;
 use App\Models\Permission;
+use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
@@ -15,13 +16,19 @@ class PermissionResource extends Resource
 {
     protected static ?string $model = Permission::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-finger-print';
+    protected static ?string $navigationGroup = "Access Control" ;
+    protected static ?int $navigationSort = 2 ;
+
 
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
-                //
+                TextInput::make('name')
+                ->autofocus()
+                ->required()
+
             ]);
     }
 
@@ -56,8 +63,8 @@ class PermissionResource extends Resource
     {
         return [
             'index' => Pages\ListPermissions::route('/'),
-            'create' => Pages\CreatePermission::route('/create'),
-            'edit' => Pages\EditPermission::route('/{record}/edit'),
+//            'create' => Pages\CreatePermission::route('/create'),
+//            'edit' => Pages\EditPermission::route('/{record}/edit'),
         ];
     }
 }
