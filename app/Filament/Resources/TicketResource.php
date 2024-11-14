@@ -35,7 +35,7 @@ class TicketResource extends Resource
                         ->autofocus()
                         ->required(),
                     Textarea::make('description')
-                        ->rows(3),
+                        ->rows(3)->nullable(),
                     Textarea::make('comment')
                         ->rows(3),
                     Select::make('status')
@@ -60,7 +60,7 @@ class TicketResource extends Resource
             ->defaultSort('created_at', 'desc')
             ->columns([
                 TextColumn::make('title')
-                    ->description(fn(Ticket $ticket): string =>$ticket->description)
+                    ->description(fn(Ticket $ticket): string =>$ticket->description || Null )
                     ->searchable()
                     ->sortable(),
 //                TextColumn::make('description'),
@@ -72,7 +72,7 @@ class TicketResource extends Resource
                 TextColumn::make('assignedTo.name'),
                 TextInputColumn::make('comment'),
                 TextColumn::make('created_at')
-                ->dateTime  ()
+                ->dateTime()
                 ->sortable(),
 
             ])
