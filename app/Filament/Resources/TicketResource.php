@@ -78,11 +78,11 @@ class TicketResource extends Resource
             ])
             ->filters([
                     SelectFilter::make('status')
-                    ->options(self::$model::STATUS)
-                    ->placeholder('Filter by status'),
+                         ->options(self::$model::STATUS)
+                         ->placeholder('Filter by status'),
                     SelectFilter::make('priority')
-                    ->options(self::$model::PRIORITY)
-                    ->placeholder('Filter by priority'),
+                         ->options(self::$model::PRIORITY)
+                         ->placeholder('Filter by priority'),
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
