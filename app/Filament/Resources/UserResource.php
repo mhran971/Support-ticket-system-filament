@@ -48,7 +48,7 @@ class UserResource extends Resource
                 TextColumn::make('email'),
             ])
             ->filters([
-                //
+                 //
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),

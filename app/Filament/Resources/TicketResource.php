@@ -64,10 +64,22 @@ class TicketResource extends Resource
                     ->searchable()
                     ->sortable(),
 //                TextColumn::make('description'),
-                TextColumn::make('status')->badge()
-                ->searchable()
-                ->sortable(),
-                TextColumn::make('priority')->badge(),
+                TextColumn::make('status')
+                    ->badge()
+                    ->colors(  [
+                    'success' => self::$model::STATUS['Open'] ,
+                    'danger'  => self::$model::STATUS['Closed'],
+                    'warning' => self::$model::STATUS['Archived'],
+                    ]),
+
+                TextColumn::make('priority')
+                    ->badge()
+                    ->colors([
+                        'success' => self::$model::PRIORITY['Low'] ,
+                        'danger'  => self::$model::PRIORITY['High'],
+                        'warning' => self::$model::PRIORITY['Medium'],
+                    ]),
+
                 TextColumn::make('assignedBy.name'),
                 TextColumn::make('assignedTo.name'),
                 TextInputColumn::make('comment'),
