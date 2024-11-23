@@ -33,7 +33,8 @@ class UserResource extends Resource
                     ->unique(),
                 TextInput::make('password')
                     ->password()
-                    ->required(),
+                    ->required()
+                    ->hiddenOn(['edit']),
 
             ]);
     }
