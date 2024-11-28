@@ -47,9 +47,13 @@ class UserResource extends Resource
                     ->searchable()
                     ->sortable(),
                 TextColumn::make('email'),
+                TextColumn::make('roles.name')
+                ->badge( ),
             ])
             ->filters([
-                 //
+                 Tables\Filters\SelectFilter::make('role')
+                     ->relationship('roles','name')
+                     ->preload(),
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),

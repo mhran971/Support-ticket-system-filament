@@ -42,8 +42,8 @@ class TicketsOverviewChart extends ChartWidget
 
             default:
             case 'year';
-                $start = now()->startOfMonth();
-                $end = now()->endOfMonth();
+                $start = now()->startOfYear();
+                $end = now()->endOfYear();
                 $perData = 'perYear';
                 break;
 
