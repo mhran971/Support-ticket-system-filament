@@ -17,7 +17,7 @@ class RolesTableSeeder extends Seeder
             $roles = [
                 [
                     'id' => 1,
-                    'name'=> Role::ROLES['admin'],
+                    'name'=> Role::ROLES['Admin'],
 
                 ],
                 [
