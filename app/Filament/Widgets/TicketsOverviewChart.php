@@ -52,7 +52,7 @@ class TicketsOverviewChart extends ChartWidget
 
         $data = Trend::model(Ticket::class)
             ->between(
-                start: $start,
+                start: $start ,
                 end: $end,
             )
             ->$perData()
