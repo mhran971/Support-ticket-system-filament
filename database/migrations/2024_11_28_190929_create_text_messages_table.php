@@ -18,6 +18,7 @@ return new class extends Migration
             $table->foreignId('sent_to')->constrained('users')->cascadeOnUpdate()->cascadeOnDelete();
             $table->foreignId('sent_by')->constrained('users')->cascadeOnUpdate()->cascadeOnDelete();
             $table->enum('status',\App\Models\TextMessage::STATUS)->default('PENDING');
+            $table->text('remarks')->nullable();
             $table->timestamps();
         });
     }

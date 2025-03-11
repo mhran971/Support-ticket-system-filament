@@ -5,14 +5,19 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\UserResource\Pages;
 use App\Filament\Resources\UserResource\RelationManagers;
 use App\Models\User;
+use App\Services\TextMessageService;
 use Filament\Forms;
+use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
+use Filament\Notifications\Notification;
 use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Tables\Actions\BulkAction;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class UserResource extends Resource
@@ -62,6 +67,15 @@ class UserResource extends Resource
             ->bulkActions([
                     Tables\Actions\BulkActionGroup::make([
                      Tables\Actions\DeleteBulkAction::make(),
+                                    BulkAction::make('sendBulkSms')
+                        ->modalButton('Send SMS')
+                            ->icon('heroicon-o-chat-bubble-left-ellipsis')
+                            ->deselectRecordsAfterCompletion()
+                        ->form([
+                            TextArea::make('Enter your massage here')->required(),
+                            Textarea::make('remarks')
+                        ])
+
                 ]),
             ]);
     }
