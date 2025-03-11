@@ -34,6 +34,7 @@ class AdminPanelProvider extends PanelProvider
             ->id('admin')
             ->path('admin')
             ->login()
+            ->databaseNotifications(true)
             ->sidebarCollapsibleOnDesktop()
             ->maxContentWidth(MaxWidth::Full)
            // ->sidebarFullyCollapsibleOnDesktop()
